@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Load GitHub Users</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+	<h1>Get User Information</h1>
+<button id="showInfo">Load GitHub Users</button>
+<div id="showme"></div>
+<script>
+document.getElementById("showInfo").addEventListener('click', onProcess);
+
+function onProcess(){
+var req = new XMLHttpRequest();
+req.open('GET', 'https://api.github.com/users', true);
+req.onload = function() {
+    if(req.status==200){
+        var people = JSON.parse(req.responseText);
+        var display ='<h1><b>Github Users</h1>';
+        for(var i in people){
+      display += '<div class='+"user_inf"+' >'+'<div class='+"user_img"+' >'+
+            '<img src="'+people[i].avatar_url+'width="110px" height="110px" >' +'</div'+
+            '<div class='+"user_cred"+' >'+'<ul>'+'<li>ID: '+people[i].id+'</li' +'<li> <br>Login: '+people[i].login + 
+        '</li'+"<li> <br> Repos: <a href = '"+ people[i].repos_url +"'>" + people[i].repos_url +'</a>'+
+        " <br> Subscription: <a href = '"+ people[i].subscriptions_url +"'>" + people[i].subscriptions_url +'</a>'+
+        " <br> Followers: <a href = '"+ people[i].followers_url +"'>" + people[i].followers_url +'</a>'
+              + '</li>'+'</ul>' +'</div>'+'</div>';
+            document.getElementById('showme').innerHTML = display;
+                }
+                
+            } 
+         
+        }
+        req.send();
+    }
+    </script>
+</body>
+</html>
