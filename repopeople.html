@@ -18,7 +18,7 @@ req.open('GET', 'https://api.github.com/users', true);
 req.onload = function() {
     if(req.status==200){
         var people = JSON.parse(req.responseText);
-        var display ='<h1><b>Github Users</h1>';
+        var display ='<h1>Github Users</h1>';
         for(var i in people){
        display += '<div class='+"user_inf"+' >'+'<div class='+"user_img"+' >'+
             '<img src="'+people[i].avatar_url+'width="90px" height="90px" >' +'</div'+
